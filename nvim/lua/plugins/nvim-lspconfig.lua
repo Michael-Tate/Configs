@@ -40,6 +40,8 @@ local config = function()
 		filetypes = { "json", "jsonc" },
 	})
 
+	-- rust is being configured with rust-tools-nvim
+
 	-- python
 	lspconfig.pyright.setup({
 		capabilities = capabilities,
@@ -58,7 +60,7 @@ local config = function()
 	})
 
 	-- typescript
-	lspconfig.tsserver.setup({
+	lspconfig.ts_ls.setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
 		filetypes = {

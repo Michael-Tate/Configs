@@ -35,23 +35,11 @@ mapkey("<C-Right>", "vertical resize -2", "n")
 -- Show Full File-Path
 mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
 
--- Notes
-mapkey("<leader>ng", "Neorg workspace general", "n")
-mapkey("<leader>nw", "Neorg workspace work", "n")
-mapkey("<leader>ny", "Neorg workspace youtube", "n")
-
 -- Indenting
 vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true })
 vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 
 local api = vim.api
-
--- Zen Mode
-api.nvim_set_keymap("n", "<leader>zn", ":TZNarrow<CR>", {})
-api.nvim_set_keymap("v", "<leader>zn", ":'<,'>TZNarrow<CR>", {})
-api.nvim_set_keymap("n", "<leader>sm", ":TZFocus<CR>", {})
-api.nvim_set_keymap("n", "<leader>zm", ":TZMinimalist<CR>", {})
-api.nvim_set_keymap("n", "<leader>za", ":TZAtaraxis<CR>", {})
 
 -- Comments
 api.nvim_set_keymap("n", "<C-_>", "gtc", { noremap = false })
