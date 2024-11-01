@@ -40,6 +40,8 @@ local config = function()
 		filetypes = { "json", "jsonc" },
 	})
 
+	-- rust is being configured with rust-tools-nvim
+
 	-- python
 	lspconfig.pyright.setup({
 		capabilities = capabilities,
