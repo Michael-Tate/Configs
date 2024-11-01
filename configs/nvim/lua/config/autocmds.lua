@@ -4,8 +4,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = lsp_fmt_group,
 	callback = function()
 		local efm = vim.tbl_filter(function(client)
-			return client.name == "efm"
-		end, vim.lsp.get_clients())
+      return client.name == "efm"
+    end, vim.lsp.get_clients())
 
 		if vim.tbl_isempty(efm) then
 			return
