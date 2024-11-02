@@ -23,6 +23,11 @@ M.on_attach = function(client, bufnr)
 		mapkey("<leader>dr", "DapContinue", "n", opts) -- continue/invoke debugger
 		mapkey("<leader>dt", "lua require('dap-python').test_method()", "n", opts) -- run tests
 	end
+
+	if client.name == "codelldb" then
+		mapkey("<leader>db", "DapToggleBreakpoint", "n", opts) -- toggle breakpoint
+		mapkey("<leader>dn", "DapContinue", "n", opts) -- continue/invoke debugger
+	end
 end
 
 return M

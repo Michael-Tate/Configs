@@ -8,8 +8,6 @@ local opts = {
 		"lua_ls",
 		"jsonls",
 		"clangd",
-		"rust_analyzer",
-    "codelldb"
 	},
 
 	automatic_installation = true,
