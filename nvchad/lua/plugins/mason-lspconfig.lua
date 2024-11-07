@@ -1,17 +1,18 @@
 local opts = {
-	ensure_installed = {
+  ensure_installed = {
     "css-lsp",
     "html-lsp",
     "lua-language-server",
-    "rust-analyzer",
-	},
+    "rust_analyzer",
+    "clangd",
+  },
 
-	automatic_installation = true,
+  automatic_installation = true,
 }
 
 return {
-	"williamboman/mason-lspconfig.nvim",
+  "williamboman/mason-lspconfig.nvim",
   opts = opts,
-	event = "BufReadPre",
-	dependencies = "williamboman/mason.nvim",
+  event = "BufReadPre",
+  dependencies = "williamboman/mason.nvim",
 }

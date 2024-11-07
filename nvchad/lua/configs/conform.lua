@@ -1,8 +1,16 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
+    cpp = { "clang-format" },
+    rust = { "rustfmt" },
+  },
+
+  formatters = {
+    ["clang-format"] = {
+      prepend_args = {
+        "--style=file:/home/tate/.clang-format",
+      },
+    },
   },
 
   format_on_save = {

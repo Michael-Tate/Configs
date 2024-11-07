@@ -1,8 +1,10 @@
 return {
   {
     "stevearc/conform.nvim",
-    event = 'BufWritePre', -- comment to get rid of format on save
-    opts = require "configs.conform",
+    event = "BufWritePre", -- comment to get rid of format on save
+    config = function()
+      require "configs.conform"
+    end,
   },
 
   {
