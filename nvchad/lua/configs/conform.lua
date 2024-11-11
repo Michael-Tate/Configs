@@ -1,14 +1,21 @@
 local options = {
   formatters_by_ft = {
-    lua = { "stylua" },
     cpp = { "clang-format" },
-    rust = { "rustfmt" },
+    lua = { "stylua" },
+    python = function(bufnr)
+      if require("conform").get_formatter_info("ruff_format", bufnr).available then
+        return { "ruff_format" }
+      else
+        return { "isort", "black" }
+      end
+    end,
+    rust = { "rustfmt" }
   },
 
   formatters = {
-    ["clang-format"] = {
+    [ "clang-format" ] = {
       prepend_args = {
-        "--style=file:/home/tate/.clang-format",
+        "--style=file:/home/mtate/.clang-format"
       },
     },
   },
@@ -20,4 +27,4 @@ local options = {
   },
 }
 
-return options
+require("conform").setup(options)
