@@ -8,7 +8,7 @@ local lspconfig = require "lspconfig"
 -- list of all servers configured.
 lspconfig.servers = {
     "ruff",
-    "pyright",
+    -- "pyright",
     "clangd",
     "dockerfilels",
     "bashls",
@@ -16,21 +16,21 @@ lspconfig.servers = {
 }
 
 --python
-lspconfig.pyright.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    pyright = {
-      disableOrganizeImports = false,
-      analysis = {
-        useLibraryCodeForTypes = true,
-        autoSearchPaths = true,
-        diagnosticMode = "workspace",
-        autoImportCompletions = true,
-      },
-    },
-  },
-})
+-- lspconfig.pyright.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = {
+--     pyright = {
+--       disableOrganizeImports = false,
+--       analysis = {
+--         useLibraryCodeForTypes = true,
+--         autoSearchPaths = true,
+--         diagnosticMode = "workspace",
+--         autoImportCompletions = true,
+--       },
+--     },
+--   },
+-- })
 
 -- lua
 lspconfig.lua_ls.setup({
