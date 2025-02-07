@@ -9,18 +9,18 @@ map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 
 -- Pane and Window Navigation
-map("n", "<C-h>", "<C-w>h", { desc = "navigate left"})
-map("n", "<C-j>", "<C-w>j", { desc = "navigate down"})
-map("n", "<C-k>", "<C-w>k", { desc = "navigate up"})
-map("n", "<C-l>", "<C-w>l", { desc = "navigate right"})
-map("t", "<C-h>", "<Cmd>wincmd h<CR>", { desc = "navigate left"})
-map("t", "<C-j>", "<Cmd>wincmd j<CR>", { desc = "navigate down"})
-map("t", "<C-k>", "<Cmd>wincmd k<CR>", { desc = "navigate up"})
-map("t", "<C-l>", "<Cmd>wincmd l<CR>", { desc = "navigate right"})
-map("n", "<C-h>", "<Cmd>TmuxNavigateLeft<CR>", { desc = "navigate left"})
-map("n", "<C-j>", "<Cmd>TmuxNavigateDown<CR>", { desc = "navigate down"})
-map("n", "<C-k>", "<Cmd>TmuxNavigateUp<CR>", { desc = "navigate up"})
-map("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>", { desc = "navigate left"})
+map("n", "<C-h>", "<C-w>h", { desc = "navigate left" })
+map("n", "<C-j>", "<C-w>j", { desc = "navigate down" })
+map("n", "<C-k>", "<C-w>k", { desc = "navigate up" })
+map("n", "<C-l>", "<C-w>l", { desc = "navigate right" })
+map("t", "<C-h>", "<Cmd>wincmd h<CR>", { desc = "navigate left" })
+map("t", "<C-j>", "<Cmd>wincmd j<CR>", { desc = "navigate down" })
+map("t", "<C-k>", "<Cmd>wincmd k<CR>", { desc = "navigate up" })
+map("t", "<C-l>", "<Cmd>wincmd l<CR>", { desc = "navigate right" })
+map("n", "<C-h>", "<Cmd>TmuxNavigateLeft<CR>", { desc = "navigate left" })
+map("n", "<C-j>", "<Cmd>TmuxNavigateDown<CR>", { desc = "navigate down" })
+map("n", "<C-k>", "<Cmd>TmuxNavigateUp<CR>", { desc = "navigate up" })
+map("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>", { desc = "navigate left" })
 
 -- Clear highlights
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
@@ -114,3 +114,22 @@ map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
 map("n", "<leader>wk", function()
   vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
 end, { desc = "whichkey query lookup" })
+
+-- Custom Mappings:
+-- <leader>wi"w	Wraps the next word in double quotes ("word")
+-- <leader>wi'$	Wraps from the cursor to end of line in single quotes ('hello world')
+-- <leader>wi[]w	Wraps the next word in square brackets ([word])
+-- <leader>wi{}ap	Wraps an entire paragraph in curly braces
+function WrapIn()
+  local char = vim.fn.nr2char(vim.fn.getchar()) -- Get wrapping character
+  local motion = vim.fn.nr2char(vim.fn.getchar()) -- Get selection motion
+
+  -- Enter visual mode, apply motion
+  vim.cmd("normal! v" .. motion)
+
+  -- Add the character before and after selection
+  vim.cmd("normal! `<i" .. char)
+  vim.cmd("normal! `>a" .. char)
+end
+
+vim.api.nvim_set_keymap("n", "<leader>wi", ":lua WrapIn()<CR>", { noremap = true, silent = true })
