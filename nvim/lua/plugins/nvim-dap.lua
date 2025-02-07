@@ -1,39 +1,33 @@
-local debugging_signs = require("util.icons").debugging_signs
-
 return {
-	"mfussenegger/nvim-dap",
-	config = function()
-		local dap = require("dap")
-		local dapui = require("dapui")
+  "mfussenegger/nvim-dap",
+  config = function()
+    local dap = require("dap")
 
-		-- set custom icons
-		for name, sign in pairs(debugging_signs) do
-			sign = type(sign) == "table" and sign or { sign }
-			vim.fn.sign_define(
-				"Dap" .. name,
-				{ text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-			)
-		end
+    -- adapters
+    dap.adapters.codelldb = {
+      type = "server",
+      port = "${port}",
 
-		-- setup dap
-		dapui.setup()
+      executable = {
+        command = vim.fn.expand("$HOME") .. "/.local/share/nvim/mason/bin/codelldb",
+        args = { "--port", "${port}", "--settings", '{"showDisassembly:" "never"}' },
+      },
+    }
 
-		-- add event listeners
-		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open()
-			vim.cmd("Hardtime disable")
-			vim.cmd("NvimTreeClose")
-		end
+    dap.configurations.rust = {
+      {
+        name = "Launch file",
+        type = "codelldb",
+        request = "launch",
+        program = function()
+          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+      },
+    }
 
-		dap.listeners.before.event_terminated["dapui_config"] = function()
-			dapui.close()
-			vim.cmd("Hardtime enable")
-		end
-
-		dap.listeners.before.event_exited["dapui_config"] = function()
-			dapui.close()
-			vim.cmd("Hardtime enable")
-		end
-	end,
-	dependencies = "rcarriga/nvim-dap-ui",
+    dap.configurations.c = dap.configurations.rust
+  end,
 }
+
